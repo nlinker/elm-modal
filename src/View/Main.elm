@@ -1,67 +1,61 @@
 module View.Main exposing (view)
 
-
-import Html exposing (Html, Attribute, button, div, h2, li, text, ul)
+import DestroyCountry.View as DestroyCountry
+import DestroyWorld.View as DestroyWorld
+import Html exposing (Attribute, Html, div, h2, li, text, ul)
 import Html.Attributes exposing (style)
-import Html.Events exposing (onClick)
 import Messages exposing (Msg(..))
 import Models exposing (Model)
 import Tacos.View as Tacos
-import DestroyWorld.View as DestroyWorld
-import DestroyCountry.View as DestroyCountry
 
 
-mainBodyStyle : Attribute msg
+mainBodyStyle : List (Attribute msg)
 mainBodyStyle =
-  style
-    [ ("padding", "10px")
-    , ("margin", "0 auto")
-    , ("width", "80%")
-    , ("max-width", "1200px")
+    [ style "padding" "10px"
+    , style "margin" "0 auto"
+    , style "width" "80%"
+    , style "max-width" "1200px"
     ]
 
 
-optionButtonStyle : Attribute msg
+optionButtonStyle : List (Attribute msg)
 optionButtonStyle =
-  style
-    [ ("appearance", "none")
-    , ("padding", "12px, 16px")
-    , ("color", "rgb(54,137,218)")
-    , ("background", "transparent")
-    , ("border", "none")
-    , ("cursor", "pointer")
-    , ("font-size", "1em")
+    [ style "appearance" "none"
+    , style "padding" "12px, 16px"
+    , style "color" "rgb(54,137,218)"
+    , style "background" "transparent"
+    , style "border" "none"
+    , style "cursor" "pointer"
+    , style "font-size" "1em"
     ]
 
 
-optionListStyle : Attribute msg
+optionListStyle : List (Attribute msg)
 optionListStyle =
-  style
-    [ ("list-style", "none" )
-    , ("display", "block")
-    , ("margin", "0")
-    , ("padding", "0")
+    [ style "list-style" "none"
+    , style "display" "block"
+    , style "margin" "0"
+    , style "padding" "0"
     ]
 
 
-optionWrapperStyle : Attribute msg
+optionWrapperStyle : List (Attribute msg)
 optionWrapperStyle =
-  style
-    [ ("padding", "16px 12px")
-    , ("border-bottom", "1px solid rgba(0,0,0,0.3)")
+    [ style "padding" "16px 12px"
+    , style "border-bottom" "1px solid rgba(0,0,0,0.3)"
     ]
 
 
 view : Model -> Html Msg
 view model =
-  div [ mainBodyStyle ]
-    [ h2 [] [ text "What would you like to do today?" ]
-    , ul [ optionListStyle ]
-      [ li [ optionWrapperStyle ]
-        [ (Html.map UpdateTacos (Tacos.view model.tacos)) ]
-      , li [ optionWrapperStyle ]
-        [ (Html.map UpdateDestroyCountry (DestroyCountry.view model.destroyCountry)) ]
-      , li [ optionWrapperStyle ]
-        [ (Html.map UpdateDestroyWorld (DestroyWorld.view model.destroyWorld)) ]
-      ]
-    ]
+    div mainBodyStyle
+        [ h2 [] [ text "What would you like to do today?" ]
+        , ul optionListStyle
+            [ li optionWrapperStyle
+                [ Html.map UpdateTacos (Tacos.view model.tacos) ]
+            , li optionWrapperStyle
+                [ Html.map UpdateDestroyCountry (DestroyCountry.view model.destroyCountry) ]
+            , li optionWrapperStyle
+                [ Html.map UpdateDestroyWorld (DestroyWorld.view model.destroyWorld) ]
+            ]
+        ]

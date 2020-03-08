@@ -1,28 +1,30 @@
 module Main exposing (..)
 
-
-import Html
-import View exposing (view)
-import Models exposing (model, Model)
+import Browser
 import Messages exposing (Msg)
+import Models exposing (Model, model)
 import Update exposing (update)
+import View exposing (view)
 
 
-main : Program Never Model Msg
+type alias Flags = ()
+
+
+main : Program Flags Model Msg
 main =
-  Html.program
-    { init = init
-    , view = view
-    , update = update
-    , subscriptions = subscriptions
-    }
+    Browser.document
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
-init : (Model, Cmd Msg)
-init =
-  (model, Cmd.none)
+init : Flags -> ( Model, Cmd Msg )
+init _ =
+    ( model, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
+subscriptions _ =
+    Sub.none

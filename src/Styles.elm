@@ -1,85 +1,79 @@
 module Styles exposing (..)
 
-
 import Html exposing (Attribute)
 import Html.Attributes exposing (style)
 
 
-optionButtonStyle : Attribute msg
+optionButtonStyle : List (Attribute msg)
 optionButtonStyle =
-  style
-    [ ("display", "inline-block")
-    , ("appearance", "none")
-    , ("padding", "12px, 16px")
-    , ("color", "rgb(54,137,218)")
-    , ("background", "transparent")
-    , ("border", "none")
-    , ("cursor", "pointer")
-    , ("font-size", "1em")
+    [ style "display" "inline-block"
+    , style "appearance" "none"
+    , style "padding" "12px, 16px"
+    , style "color" "rgb(54,137,218)"
+    , style "background" "transparent"
+    , style "border" "none"
+    , style "cursor" "pointer"
+    , style "font-size" "1em"
     ]
+
 
 
 -- MODAL STYLES
 
 
-maskStyle : Attribute msg
+maskStyle : List (Attribute msg)
 maskStyle =
-  style
-    [ ("background-color", "rgba(0,0,0,0.3)")
-    , ("position", "fixed")
-    , ("top", "0")
-    , ("left", "0")
-    , ("width", "100%")
-    , ("height", "100%")
+    [ style "background-color" "rgba(0,0,0,0.3)"
+    , style "position" "fixed"
+    , style "top" "0"
+    , style "left" "0"
+    , style "width" "100%"
+    , style "height" "100%"
     ]
 
 
-modalStyle : Attribute msg
+modalStyle : List (Attribute msg)
 modalStyle =
-  style
-    [ ("background-color", "rgba(255,255,255,1.0)")
-    , ("position", "absolute")
-    , ("top", "50%")
-    , ("left", "50%")
-    , ("height", "auto")
-    , ("max-height", "80%")
-    , ("width", "700px")
-    , ("max-width", "95%")
-    , ("padding", "10px")
-    , ("border-radius", "3px")
-    , ("box-shadow", "1px 1px 5px rgba(0,0,0,0.5)")
-    , ("transform", "translate(-50%, -50%)")
+    [ style "background-color" "rgba(255,255,255,1.0)"
+    , style "position" "absolute"
+    , style "top" "50%"
+    , style "left" "50%"
+    , style "height" "auto"
+    , style "max-height" "80%"
+    , style "width" "700px"
+    , style "max-width" "95%"
+    , style "padding" "10px"
+    , style "border-radius" "3px"
+    , style "box-shadow" "1px 1px 5px rgba(0,0,0,0.5)"
+    , style "transform" "translate(-50%, -50%)"
     ]
 
 
-modalHeaderStyle : Attribute msg
+modalHeaderStyle : List (Attribute msg)
 modalHeaderStyle =
-  style
-    [ ("padding", "10px")
-    , ("margin", "0px")
-    , ("border-bottom", "1px solid rgba(0,0,0,0.3)")
+    [ style "padding" "10px"
+    , style "margin" "0px"
+    , style "border-bottom" "1px solid rgba(0,0,0,0.3)"
     ]
 
 
-modalBodyStyle : Attribute msg
+modalBodyStyle : List (Attribute msg)
 modalBodyStyle =
-  style
-    [ ("padding", "10px")
+    [ style "padding" "10px"
     ]
 
 
-modalDescStyle : Attribute msg
+modalDescStyle : List (Attribute msg)
 modalDescStyle =
-  style
-    [ ("margin", "0 0 8px 0") ]
+    [ style "margin" "0 0 8px 0"
+    ]
 
 
-textInputStyle : Attribute msg
+textInputStyle : List (Attribute msg)
 textInputStyle =
-  style
-    [ ("display", "block")
-    , ("width", "100%")
-    , ("line-height", "24px")
-    , ("margin", "0 0 8px 0")
-    , ("border", "1px solid rgba(0,0,0,0.3)")
+    [ style "display" "block"
+    , style "width" "100%"
+    , style "line-height" "24px"
+    , style "margin" "0 0 8px 0"
+    , style "border" "1px solid rgba(0,0,0,0.3)"
     ]

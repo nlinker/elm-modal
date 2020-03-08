@@ -2,7 +2,7 @@ module DestroyWorld.Messages exposing (..)
 
 
 type Msg
-  = NoOp
-  | RequestWorldDestruction
-  | ConfirmWorldDestruction
-  | AbortWorldDestruction
+    = NoOp
+    | RequestWorldDestruction
+    | ConfirmWorldDestruction
+    | AbortWorldDestruction

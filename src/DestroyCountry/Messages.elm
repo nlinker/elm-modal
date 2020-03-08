@@ -2,8 +2,8 @@ module DestroyCountry.Messages exposing (..)
 
 
 type Msg
-  = NoOp
-  | ChooseCountry
-  | UpdateTarget String
-  | ConfirmCountry
-  | AbortBombing
+    = NoOp
+    | ChooseCountry
+    | UpdateTarget String
+    | ConfirmCountry
+    | AbortBombing

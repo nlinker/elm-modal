@@ -1,38 +1,35 @@
 module View.DeathScreen exposing (view)
 
-
-import Html exposing (Html, Attribute, div, h2, text)
+import Html exposing (Attribute, Html, div, h2, text)
 import Html.Attributes exposing (style)
 import Messages exposing (Msg)
 
 
-deathScreenStyle : Attribute msg
+deathScreenStyle : List (Attribute msg)
 deathScreenStyle =
-  style
-    [ ("position", "fixed")
-    , ("top", "0")
-    , ("left", "0")
-    , ("background-color", "rgb(0,0,0)")
-    , ("color", "rgb(255,0,0)")
-    , ("height", "100%")
-    , ("width", "100%")
+    [ style "position" "fixed"
+    , style "top" "0"
+    , style "left" "0"
+    , style "background-color" "rgb(0,0,0)"
+    , style "color" "rgb(255,0,0)"
+    , style "height" "100%"
+    , style "width" "100%"
     ]
 
 
-deathHeaderStyle : Attribute msg
+deathHeaderStyle : List (Attribute msg)
 deathHeaderStyle =
-  style
-    [ ("position", "absolute")
-    , ("top", "50%")
-    , ("left", "50%")
-    , ("margin-right", "-50%")
-    , ("transform", "translate(-50%, -50%)")
+    [ style "position" "absolute"
+    , style "top" "50%"
+    , style "left" "50%"
+    , style "margin-right" "-50%"
+    , style "transform" "translate(-50%, -50%)"
     ]
 
 
 view : Html Msg
 view =
-  div [ deathScreenStyle ]
-    [ h2 [ deathHeaderStyle ]
-      [ text "The world has been destroyed. Have a nice day :)" ]
-    ]
+    div deathScreenStyle
+        [ h2 deathHeaderStyle
+            [ text "The world has been destroyed. Have a nice day :)" ]
+        ]

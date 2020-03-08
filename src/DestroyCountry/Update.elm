@@ -1,60 +1,55 @@
 module DestroyCountry.Update exposing (update)
 
-
-import DestroyCountry.Models exposing (..)
 import DestroyCountry.Messages exposing (Msg(..))
+import DestroyCountry.Models exposing (..)
 
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    NoOp ->
-      (model, Cmd.none)
+    case msg of
+        NoOp ->
+            ( model, Cmd.none )
 
-    ChooseCountry ->
-      let
-        newModel =
-          { model | modal = (Just modal) }
+        ChooseCountry ->
+            let
+                newModel =
+                    { model | modal = Just modal }
+            in
+            ( newModel, Cmd.none )
 
-      in
-        (newModel, Cmd.none)
+        UpdateTarget target ->
+            let
+                newModal =
+                    Maybe.map (\x -> { x | currentTarget = target }) model.modal
 
-    UpdateTarget target ->
-      let
-        newModal =
-          Maybe.map (\x -> { x | currentTarget = target }) model.modal
+                newModel =
+                    { model | modal = newModal }
+            in
+            ( newModel, Cmd.none )
 
-        newModel =
-          { model | modal = newModal }
+        ConfirmCountry ->
+            let
+                countriesDestroyed =
+                    case model.modal of
+                        Just modal ->
+                            modal.currentTarget :: model.countriesDestroyed
 
-      in
-        (newModel, Cmd.none)
+                        _ ->
+                            model.countriesDestroyed
 
-    ConfirmCountry ->
-      let
-        countriesDestroyed =
-          case model.modal of
-            Just modal ->
-              modal.currentTarget :: model.countriesDestroyed
+                newModel =
+                    { model
+                        | countriesDestroyed = countriesDestroyed
+                        , modal = Nothing
+                    }
+            in
+            ( newModel, Cmd.none )
 
-            _ -> model.countriesDestroyed
-
-        newModel =
-          { model
-          | countriesDestroyed = countriesDestroyed
-          , modal = Nothing
-          }
-
-      in
-        (newModel, Cmd.none)
-
-    AbortBombing ->
-      let
-        newModel =
-          { model
-          | modal = Nothing
-          }
-
-      in
-        (newModel, Cmd.none)
-
+        AbortBombing ->
+            let
+                newModel =
+                    { model
+                        | modal = Nothing
+                    }
+            in
+            ( newModel, Cmd.none )

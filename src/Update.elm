@@ -1,91 +1,87 @@
 module Update exposing (update)
 
-
-import Models exposing (Model, Modal(..))
+import DestroyCountry.Update as DestroyCountry
+import DestroyWorld.Update as DestroyWorld
 import Messages exposing (Msg(..))
+import Models exposing (Modal(..), Model)
 import Ports as Ports
 import Tacos.Update as Tacos
-import DestroyWorld.Update as DestroyWorld
-import DestroyCountry.Update as DestroyCountry
 
 
 isJust : Maybe a -> Bool
 isJust maybe =
-  case maybe of
-    Just x ->
-      True
+    case maybe of
+        Just _ ->
+            True
 
-    _ ->
-      False
+        _ ->
+            False
 
 
 focusCmd : Maybe a -> Maybe a -> Cmd Msg
 focusCmd old new =
-  case ((isJust old), (isJust new)) of
-    (False, True) ->
-      Ports.focusModal()
+    case ( isJust old, isJust new ) of
+        ( False, True ) ->
+            Ports.focusModal ()
 
-    _ ->
-      Cmd.none
+        _ ->
+            Cmd.none
 
 
-update : Msg -> Model -> (Model, Cmd Msg)
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-  case msg of
-    NoOp ->
-      (model, Cmd.none)
+    case msg of
+        NoOp ->
+            ( model, Cmd.none )
 
-    ResetModalFocus ->
-      (model, (Ports.focusModal ()))
+        ResetModalFocus ->
+            ( model, Ports.focusModal () )
 
-    UpdateTacos msg ->
-      let
-        (newTacos, _) =
-          Tacos.update msg model.tacos
+        UpdateTacos m ->
+            let
+                ( newTacos, _ ) =
+                    Tacos.update m model.tacos
 
-        newModel =
-          { model
-          | tacos = newTacos
-          , modal = Maybe.map TacoModal newTacos.modal
-          }
+                newModel =
+                    { model
+                        | tacos = newTacos
+                        , modal = Maybe.map TacoModal newTacos.modal
+                    }
 
-        newCommand =
-          focusCmd model.modal newModel.modal
+                newCommand =
+                    focusCmd model.modal newModel.modal
+            in
+            ( newModel, newCommand )
 
-      in
-        (newModel, newCommand)
+        UpdateDestroyCountry m ->
+            let
+                ( newDestroyCountry, _ ) =
+                    DestroyCountry.update m model.destroyCountry
 
-    UpdateDestroyCountry msg ->
-      let
-        (newDestroyCountry, _) =
-          DestroyCountry.update msg model.destroyCountry
+                newModel =
+                    { model
+                        | destroyCountry = newDestroyCountry
+                        , modal = Maybe.map CountryModal newDestroyCountry.modal
+                    }
 
-        newModel =
-          { model
-          | destroyCountry = newDestroyCountry
-          , modal = Maybe.map CountryModal newDestroyCountry.modal
-          }
+                newCommand =
+                    focusCmd model.modal newModel.modal
+            in
+            ( newModel, newCommand )
 
-        newCommand =
-          focusCmd model.modal newModel.modal
+        UpdateDestroyWorld m ->
+            let
+                ( newDestroyWorld, _ ) =
+                    DestroyWorld.update m model.destroyWorld
 
-      in
-        (newModel, newCommand)
+                newModel =
+                    { model
+                        | destroyWorld = newDestroyWorld
+                        , isWorldDestroyed = newDestroyWorld.isWorldDestroyed
+                        , modal = Maybe.map WorldModal newDestroyWorld.modal
+                    }
 
-    UpdateDestroyWorld msg ->
-      let
-        (newDestroyWorld, _) =
-          DestroyWorld.update msg model.destroyWorld
-
-        newModel =
-          { model
-          | destroyWorld = newDestroyWorld
-          , isWorldDestroyed = newDestroyWorld.isWorldDestroyed
-          , modal = Maybe.map WorldModal newDestroyWorld.modal
-          }
-
-        newCommand =
-          focusCmd model.modal newModel.modal
-
-      in
-        (newModel, newCommand)
+                newCommand =
+                    focusCmd model.modal newModel.modal
+            in
+            ( newModel, newCommand )

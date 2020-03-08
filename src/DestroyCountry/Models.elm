@@ -2,24 +2,24 @@ module DestroyCountry.Models exposing (..)
 
 
 type alias Modal =
-  { currentTarget : String
-  }
+    { currentTarget : String
+    }
 
 
 type alias Model =
-  { countriesDestroyed : List String
-  , modal : Maybe Modal
-  }
+    { countriesDestroyed : List String
+    , modal : Maybe Modal
+    }
 
 
 model : Model
 model =
-  { countriesDestroyed = []
-  , modal = Nothing
-  }
+    { countriesDestroyed = []
+    , modal = Nothing
+    }
 
 
 modal : Modal
 modal =
-  { currentTarget = ""
-  }
+    { currentTarget = ""
+    }
