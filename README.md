@@ -10,10 +10,7 @@ This is fork is an upgrade the repo to Elm-0.19.1
 
 Install elm
 ```bash
-$ npm install -g elm
-$ npm install elm-test
-$ npm install elm-format
-
+$ npm install -g elm elm-test elm-format
 $ elm --version  # check elm version
 0.19.1
 ```
